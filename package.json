@@ -1,0 +1,25 @@
+{
+  "name": "express.js-curso",
+  "version": "1.0.0",
+  "description": "Curso de platzi de express.js",
+  "main": "index.js",
+  "dependencies": {
+    "express": "^4.16.4",
+    "morgan": "^1.9.1",
+    "nodemon": "^1.18.10"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FacundoPalombo/express.js-curso.git"
+  },
+  "author": "Facundo Palombo",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/FacundoPalombo/express.js-curso/issues"
+  },
+  "homepage": "https://github.com/FacundoPalombo/express.js-curso#readme"
+}
