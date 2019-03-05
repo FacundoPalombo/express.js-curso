@@ -5,6 +5,7 @@ const productsService = new ProductsService();
 
 router.get('/', async (req, res, next) => {
     const { tags } = req.query;
+    console.log('req: ', req.query)
     try {
         const product = await productsService.getProducts({
             tags
@@ -20,6 +21,7 @@ router.get('/', async (req, res, next) => {
 
 router.get('/:productId', async (req, res, next) => {
     const { productId } = req.params;
+    console.log('req: ', req.params)
     try {
         const product = await productsService.getProduct({ productId })
         res.status(200).json({
@@ -32,11 +34,12 @@ router.get('/:productId', async (req, res, next) => {
 })
 
 router.post('/', async (req, res, next) => {
-    const { info } = req.body;
+    const { body: product } = req;
+    console.log('req: ', req)
     try {
-        const product = productsService.createProduct({ info })
+        const createdProduct = productsService.createProduct({ product })
         res.status(201).json({
-            data: product,
+            data: createdProduct,
             message: 'product created'
         })
     } catch (error) {
@@ -47,6 +50,7 @@ router.post('/', async (req, res, next) => {
 router.put('/:productId', async (req, res, next) => {
     const { productId } = req.params;
     const { body: product } = req;
+    console.log('req: ', req.params)
     try {
         const updatedProduct = productsService.updateProduct({ productId , product })
         res.status(200).json({
@@ -61,6 +65,7 @@ router.put('/:productId', async (req, res, next) => {
 router.patch('/:productId', async (req, res, next) => {
     const { productId } = req.params;
     const { body: product } = req;
+    console.log('req: ', req.params)
     try {
         const patchedProduct = productsService.patchProduct({ productId , product })
         res.status(200).json({
@@ -74,9 +79,11 @@ router.patch('/:productId', async (req, res, next) => {
 
 router.delete('/:productId', async (req, res, next) => {
     const { productId } = req.params;
+    console.log('req: ', req.params)
     try {
+        const deletedProduct = productsService.deleteProduct({ productId })
         res.status(200).json({
-            data: product,
+            data: deletedProduct,
             message: 'product deleted'
         })
     } catch (error) {
