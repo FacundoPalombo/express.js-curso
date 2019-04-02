@@ -23,17 +23,17 @@ class ProductsService {
         return createdProductId;
     }
     
-    updateProduct({ productId, product }) {
+    async updateProduct({ productId, product }) {
         const updatedProductId = await this.mongoDB.update(this.collection, productId, product)
         return updatedProductId;
     }
     
-    patchProduct({ productId, product }) {
+    async patchProduct({ productId, product }) {
         const patchedProductId = await this.mongoDB.patch(this.collection, productId, product)
         return patchedProductId;
     }
     
-    deleteProduct({ productId }) {
+    async deleteProduct({ productId }) {
         const deletedProductId = await this.mongoDB.delete(this.collection, productId)
         return deletedProductId;
     }
