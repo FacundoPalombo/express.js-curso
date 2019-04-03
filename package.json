@@ -4,6 +4,7 @@
   "description": "Curso de platzi de express.js",
   "main": "index.js",
   "dependencies": {
+    "@sentry/node": "^5.0.3",
     "dotenv": "6.2.0",
     "express": "^4.16.4",
     "mongodb": "^3.1.13",

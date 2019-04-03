@@ -1,4 +1,4 @@
-const productMocks = require('../utils/mocks/products')
+//const productMocks = require('../utils/mocks/products')
 const MongoLib = require('../lib/mongo')
 
 class ProductsService {

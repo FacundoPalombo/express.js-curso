@@ -1,7 +1,12 @@
 const { config } = require('../../config')
+const Sentry = require('@sentry/node')
+
+//Sentry Initialization
+Sentry.init({ dsn: `https://${config.sentryDNS}@sentry.io/${config.sentryID}` });
 
 function logError(err, req, res, next) {
-    console.log(err.stack);
+    Sentry.captureException(err);
+    console.error(err.stack);
     next(err);
 }
 
