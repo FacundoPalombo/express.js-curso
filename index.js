@@ -4,7 +4,14 @@ const app = express();
 const path = require('path')
 const productsRouter = require('./routes/views/products')
 const productsApiRouter = require('./routes/api/products')
-const { logError, clientErrorHandler, errorHandler} = require('./utils/middlewares/errorHandlers')
+const {
+    logError,
+    clientErrorHandler,
+    errorHandler,
+    wrapErrors
+} = require('./utils/middlewares/errorHandlers')
+const isRequestAjaxOrApi = require('./utils/scripts/isRequestAjaxOrApi')
+const boom = require('boom')
 
 //Middlewares
 app.use(express.json()); //body parser
@@ -28,11 +35,22 @@ app.use('/products', productsRouter)
 app.set('views', path.join(__dirname, 'views'))
 app.set('view engine', 'pug')
 
-//Error handlers
+//|-Middlewares
+app.use((req, res, next)=> {
+    if(isRequestAjaxOrApi(req)) {
+        const {
+            output: { statusCode, payload }
+        } = boom.notFound()
+        res.status(statusCode).json(payload)
+    }
+    res.status(404).render('404')
+})
+//|--|Error handlers
 
 app.use(logError);
 app.use(clientErrorHandler);
 app.use(errorHandler);
+app.use(wrapErrors);
 
 //Server initialization
 const server = app.listen(port, ()=> {
